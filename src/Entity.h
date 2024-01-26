@@ -13,14 +13,17 @@ public:
     Vector2 position;
     Vector2 velocity = {0,0};
     float maxSpeed = 10;
-    float terminalVelocity;
-    float massGravity;
+    float terminalVelocity = 50;
+    float massGravity = 5;
     Texture2D entityTexture;
     Rectangle sourceRec;
+    int state;
+    enum states{Idle = 0, Walking = 1, Running = 2, Sliding = 3, Jumping = 4, Laying = 5};
 
     void handleGravity();
     void transformPosition();
     bool checkForCollision(Vector2 nextPosition);
+    void animation(int frameCount_p);
 };
 
 

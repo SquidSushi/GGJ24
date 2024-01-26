@@ -15,7 +15,9 @@ int main() {
     ToggleFullscreen();
 #endif
 
-    Player cattington(LoadTexture("assets/graphics/testimage.png"), {0,0}, {0,0,120,120});
+    int frameCount = 0;
+
+    Player cattington(LoadTexture("assets/graphics/cat/idle.png"), {0,0}, {8,0,16,32});
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -30,14 +32,12 @@ int main() {
         BeginDrawing();
             ClearBackground(WHITE);
             DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
-            DrawTexturePro(cattington.entityTexture, cattington.sourceRec,{cattington.position.x, cattington.position.y, 16, 24}, {0,0}, 0, WHITE);
+            cattington.animation(frameCount);
 
         EndDrawing();
+        frameCount++;
     } // Main game loop end
 
-    // De-initialization here
-    // ...
-    // ...
     UnloadTexture(cattington.entityTexture);
 
     // Close window and OpenGL context
