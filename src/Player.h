@@ -7,7 +7,12 @@
 #include "Entity.h"
 
 class Player : public Entity {
-
+public:
+    void PlayerMovement();
+    bool pressedLeft();
+    bool pressedRight();
+    bool pressedJump();
+    Player(Texture2D _entityTexture, Vector2 _position, Rectangle _sourceRec);
 };
 
 

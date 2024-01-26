@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "config.h"
+#include "Player.h"
 
 int main() {
     // Raylib initialization
@@ -14,25 +15,22 @@ int main() {
     ToggleFullscreen();
 #endif
 
-    // Your own initialization code here
-    // ...
-    // ...
-    Texture2D myTexture = LoadTexture("assets/graphics/testimage.png");
+    Player cattington(LoadTexture("assets/graphics/testimage.png"), {0,0}, {0,0,120,120});
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
-        // Updates that are made by frame are coded here
-        // ...
-        // ...
+        cattington.PlayerMovement();
+
+        //Gravity Handling
+        cattington.handleGravity();
+
+        cattington.transformPosition();
 
         BeginDrawing();
-            // You can draw on the screen between BeginDrawing() and EndDrawing()
-            // ...
-            // ...
             ClearBackground(WHITE);
             DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
-            DrawTexture(myTexture, 10, 100, WHITE);
+            DrawTexturePro(cattington.entityTexture, cattington.sourceRec,{cattington.position.x, cattington.position.y, 16, 24}, {0,0}, 0, WHITE);
 
         EndDrawing();
     } // Main game loop end
@@ -40,7 +38,7 @@ int main() {
     // De-initialization here
     // ...
     // ...
-    UnloadTexture(myTexture);
+    UnloadTexture(cattington.entityTexture);
 
     // Close window and OpenGL context
     CloseWindow();

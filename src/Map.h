@@ -6,8 +6,11 @@
 #define RAYLIBSTARTER_MAP_H
 
 
-class Map {
+#include <vector>
 
+class Map {
+    void drawMap();
+    int collisionData[15][15];
 };
 
 
