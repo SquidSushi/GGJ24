@@ -18,8 +18,8 @@ public:
     Texture2D entityTexture;
     Rectangle sourceRec;
     int currentFrame = 0;
-    int state;
-    enum states{Idle = 0, Walking = 1, Running = 2, Sliding = 3, Jumping = 4, Laying = 5};
+    int state = 0;
+    enum states{Idle = 0, Walking = 1, Running = 2, Sliding = 3, Jumping = 4, Falling = 5, Laying = 6, Throwing = 7};
 
     void handleGravity();
     void wrapAroundScreen();

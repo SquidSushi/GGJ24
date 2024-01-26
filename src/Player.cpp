@@ -2,7 +2,6 @@
 // Created by jacob on 26.01.2024.
 //
 
-#include <valarray>
 #include "Player.h"
 
 //Default Constructor
@@ -17,20 +16,37 @@ void Player::PlayerMovement()
 {
     if(pressedLeft())
     {
-        if(abs(velocity.x) < maxSpeed)
+        if(velocity.x > maxSpeed * -1)
         velocity.x -= 1;
+        if(velocity.x > 0){
+            state = Sliding;
+        }
+        if(velocity.x < 0){
+            state = Walking;
+        }
     }
     if(pressedRight())
     {
-        if(velocity.x < maxSpeed)
-        velocity.x += 1;
+        if(velocity.x < maxSpeed){
+            if(velocity.x < 0){
+                state = Sliding;
+            }
+            velocity.x += 1;
+        }
+        if(velocity.x > 0){
+            state = Walking;
+        }
     }
-    if(!pressedRight() && !pressedLeft()){
+    if(!pressedRight() && !pressedLeft() && state != Jumping && state != Falling){
         velocity.x *= 0.5;
+        if(velocity.x < 1){
+            state = Idle;
+        }
     }
-    if(pressedJump())
+    if(pressedJump() && state != Jumping && state != Falling)
     {
-
+        velocity.y -= jumpForce;
+        state = Jumping;
     }
 }
 

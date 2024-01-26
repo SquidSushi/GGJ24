@@ -8,6 +8,8 @@
 
 class Player : public Entity {
 public:
+    float jumpForce = 40;
+
     void PlayerMovement();
     bool pressedLeft();
     bool pressedRight();
