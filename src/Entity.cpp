@@ -16,8 +16,8 @@ void Entity::handleGravity() {
 }
 
 bool Entity::checkForCollision(Vector2 nextPosition) {
-    if(nextPosition.y > Game::ScreenHeight - sourceRec.height){
-        this->position.y = Game::ScreenHeight - sourceRec.height;
+    if(nextPosition.y > 16*12 - sourceRec.height){
+        this->position.y = 16*12 - sourceRec.height;
         this->velocity.y = 0;
         return false;
     }
