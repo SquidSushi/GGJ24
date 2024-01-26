@@ -42,5 +42,7 @@ void Entity::animation(int frameCount_p) {
 
 void Entity::wrapAroundScreen() {
     position.x = fmod(position.x, 16*16);
-
+    if(position.x < 0){
+        position.x += 16*16;
+    } 
 }
