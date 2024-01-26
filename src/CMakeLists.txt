@@ -8,7 +8,17 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp
+        Entity.h
+        Entity.cpp
+        Player.h
+        Player.cpp
+        JumpingEnemy.h
+        JumpingEnemy.cpp
+        WalkingEnemy.h
+        WalkingEnemy.cpp
+        Map.h
+        Map.cpp)
 
 # Add config.h.in file
 configure_file(config.h.in config.h)
