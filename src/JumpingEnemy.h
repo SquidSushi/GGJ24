@@ -9,6 +9,12 @@
 #include "Entity.h"
 
 class JumpingEnemy : public Entity {
+    enum {Waiting, Jumping, Slipping, Yeeting} state;
+    Texture2D standingTexture;
+    Texture2D jumpingTexture;
+    Texture2D slippingTexture;
+    Texture2D yeetingTexture;
+    int frameCount = 0;
 
 };
 

@@ -26,6 +26,7 @@ public:
     void transformPosition();
     bool checkForCollision(Vector2 nextPosition);
     void animation(int frameCount_p);
+    virtual void update() = 0;
 };
 
 
