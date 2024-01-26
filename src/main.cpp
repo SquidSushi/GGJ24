@@ -21,15 +21,20 @@ int main() {
 
     Player cattington(LoadTexture("assets/graphics/cat/idle.png"), {0, 0}, {8, 0, 16, 32});
     RenderTexture gameCanvas = LoadRenderTexture(16 * 16, 16 * 12);
+    bool f3mode = false;
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
+        if (IsKeyPressed(KEY_F3)) {
+            f3mode = !f3mode;
+        }
+
         cattington.PlayerMovement();
 
         //Gravity Handling
         cattington.handleGravity();
-
+        cattington.wrapAroundScreen();
         cattington.transformPosition();
 
         BeginDrawing();
@@ -49,6 +54,12 @@ int main() {
                 {float(GetScreenWidth()/2 - gameCanvas.texture.width*scale/2), float(GetScreenHeight()/2 - gameCanvas.texture.height*scale/2), float(gameCanvas.texture.width*scale), float(gameCanvas.texture.height*scale)},
 
                 {0,0},0,WHITE);
+        if (f3mode) {
+            DrawFPS(10, 10);
+            //Draw cattingtons x and y position in integers
+            DrawText(TextFormat("x: %i", (int) cattington.position.x), 10, 30, 10, LIGHTGRAY);
+            DrawText(TextFormat("y: %i", (int) cattington.position.y), 10, 40, 10, LIGHTGRAY);
+        }
         EndDrawing();
         frameCount++;
     } // Main game loop end

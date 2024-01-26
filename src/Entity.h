@@ -17,10 +17,12 @@ public:
     float massGravity = 5;
     Texture2D entityTexture;
     Rectangle sourceRec;
+    int currentFrame = 0;
     int state;
     enum states{Idle = 0, Walking = 1, Running = 2, Sliding = 3, Jumping = 4, Laying = 5};
 
     void handleGravity();
+    void wrapAroundScreen();
     void transformPosition();
     bool checkForCollision(Vector2 nextPosition);
     void animation(int frameCount_p);
