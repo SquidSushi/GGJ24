@@ -6,7 +6,9 @@
 #define RAYLIBSTARTER_WALKINGENEMY_H
 
 
-class WalkingEnemy {
+#include "Entity.h"
+
+class WalkingEnemy : public Entity {
 
 };
 

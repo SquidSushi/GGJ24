@@ -6,7 +6,9 @@
 #define RAYLIBSTARTER_JUMPINGENEMY_H
 
 
-class JumpingEnemy {
+#include "Entity.h"
+
+class JumpingEnemy : public Entity {
 
 };
 

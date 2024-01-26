@@ -4,9 +4,9 @@
 
 #ifndef RAYLIBSTARTER_PLAYER_H
 #define RAYLIBSTARTER_PLAYER_H
+#include "Entity.h"
 
-
-class Player {
+class Player : public Entity {
 
 };
 
