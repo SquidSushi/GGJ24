@@ -11,7 +11,7 @@ Player::Player(Vector2 _position, Rectangle _sourceRec) {
     walkingAnimation = LoadTexture("assets/graphics/cat/walk.png");
     jumpingAnimation = LoadTexture("assets/graphics/cat/JumpFinal.png");
     fallingAnimation = LoadTexture("assets/graphics/cat/FallingFinal.png");
-    slidingAnimation = LoadTexture("assets/graphics/cat/idle.png");
+    slidingAnimation = LoadTexture("assets/graphics/cat/Cat Slipping.png");
     position = _position;
     sourceRec = _sourceRec;
 }
@@ -21,13 +21,14 @@ void Player::PlayerMovement()
 {
     if(pressedLeft())
     {
-        if(velocity.x > maxSpeed * -1)
-        velocity.x -= 0.25;
-        if(velocity.x > 0 && state != Jumping && state != Falling){
-            state = Sliding;
-        }
-        if(velocity.x < 0 && state != Jumping && state != Falling){
-            state = Walking;
+        if(velocity.x > maxSpeed * -1) {
+            velocity.x -= 0.25;
+            if (velocity.x < 0 && state != Jumping && state != Falling) {
+                state = Walking;
+            }
+            if (velocity.x > 0 && state != Jumping && state != Falling) {
+                state = Sliding;
+            }
         }
     }
     if(pressedRight())
@@ -42,9 +43,9 @@ void Player::PlayerMovement()
             state = Walking;
         }
     }
-    if(!pressedRight() && !pressedLeft() && state != Jumping && state != Falling){
+    if(!pressedRight() && !pressedLeft()){
         velocity.x *= 0.75;
-        if(velocity.x < 1 && velocity.x > -1){
+        if(velocity.x < 1 && velocity.x > -1 && state != Jumping && state != Falling){
             state = Idle;
         }
     }
@@ -150,5 +151,33 @@ void Player::animateFalling(int frameCount_p){
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
+    }
+}
+
+void Player::updateState() {
+    if(pressedLeft())
+    {
+        if (velocity.x < 0) {
+            state = Walking;
+        }
+        if (velocity.x > 0) {
+            state = Sliding;
+        }
+    }
+    if(pressedRight())
+    {
+        if(velocity.x < maxSpeed){
+            if(velocity.x < 0){
+                state = Sliding;
+            }
+        }
+        if(velocity.x > 0){
+            state = Walking;
+        }
+    }
+    if(!pressedRight() && !pressedLeft()){
+        if(velocity.x < 1 && velocity.x > -1){
+            state = Idle;
+        }
     }
 }
