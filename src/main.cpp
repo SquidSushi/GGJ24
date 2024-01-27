@@ -52,7 +52,7 @@ int main() {
         BeginTextureMode(gameCanvas);
         {
             ClearBackground(BLACK);
-            DrawRectangleGradientV(0, 0, 16 * 18, 16 * 13, GetColor(0xa355dfff), GetColor(0x460074ff));
+            //DrawRectangleGradientV(0, 0, 16 * 18, 16 * 13, GetColor(0xa355dfff), GetColor(0x460074ff));
             //DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
             theGameMap.drawMap();
             cattington.animation(frameCount);

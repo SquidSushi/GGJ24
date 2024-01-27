@@ -12,7 +12,7 @@ class Entity {
 public:
     Vector2 position;
     Vector2 velocity = {0,0};
-    float maxSpeed = 3;
+    float maxSpeed = 2;
     float terminalVelocity = 1;
     float massGravity = 0.1;
     Texture2D entityTexture;

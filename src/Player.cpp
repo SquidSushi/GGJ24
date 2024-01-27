@@ -26,7 +26,7 @@ void Player::PlayerMovement()
     if(pressedLeft())
     {
         if(velocity.x > maxSpeed * -1) {
-            velocity.x -= 0.25;
+            velocity.x -= 0.125;
             if (velocity.x < 0 && state != Jumping && state != Falling) {
                 state = Walking;
             }
@@ -41,7 +41,7 @@ void Player::PlayerMovement()
             if(velocity.x < 0 && state != Jumping && state != Falling){
                 state = Sliding;
             }
-            velocity.x += 0.25;
+            velocity.x += 0.125;
         }
         if(velocity.x > 0 && state != Jumping && state != Falling){
             state = Walking;
@@ -55,6 +55,7 @@ void Player::PlayerMovement()
     }
     if(pressedJump() && state != Jumping && state != Falling)
     {
+        position.y -= 1;
         velocity.y -= jumpForce;
         state = Jumping;
     }
@@ -87,11 +88,12 @@ bool Player::pressedJump() {
 }
 
 void Player::update(int frameCount_p) {
+    if(state == Jumping || state == Falling || state == Walking){
+        handleGravity();
+    }
     handleCollision();
-    handleGravity();
     wrapAroundScreen();
     transformPosition();
-
 }
 
 void Player::animation(int frameCount_p) {
@@ -190,15 +192,14 @@ void Player::updateState() {
 
 void Player::handleCollision() {
     if(state == Jumping || state == Falling){
-            if (collisions & 3){
-                velocity.y = 0;
-                if (collisions & 1){
-                    state = Walking;
-                    updateState();
-                }
-                if (collisions & 2){
-                     state = Falling;
-                }
+        if (collisions & 3){
+            velocity.y = 0;
+            if (collisions & 1){
+                updateState();
+            }
+            if (collisions & 2){
+                state = Falling;
+            }
         }
     }
 }
