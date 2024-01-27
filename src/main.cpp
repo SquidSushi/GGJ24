@@ -24,7 +24,7 @@ int main() {
 
     WalkingEnemy karen;
     Player cattington({0, 0}, {0, 0, 32, 32});
-    RenderTexture gameCanvas = LoadRenderTexture(16 * 16, 16 * 12);
+    RenderTexture gameCanvas = LoadRenderTexture(16 * 18, 16 * 13);
     bool f3mode = false;
     Map theGameMap;
     theGameMap.init();
@@ -47,17 +47,18 @@ int main() {
         BeginTextureMode(gameCanvas);
         {
             ClearBackground(BLACK);
-            DrawRectangleGradientV(0, 0, 16 * 16, 16 * 12, GetColor(0xa355dfff), GetColor(0x460074ff));
+            DrawRectangleGradientV(0, 0, 16 * 18, 16 * 13, GetColor(0xa355dfff), GetColor(0x460074ff));
             //DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
             theGameMap.drawMap();
             cattington.animation(frameCount);
             karen.animation(frameCount);
             if (f3mode) {
                 //draw a grid
-                for (int x = 0; x < 16; x++) {
-                    for (int y = 0; y < 12; y++) {
-                        DrawRectangleLines(x * 16, y * 16, 16, 16, ColorAlpha(WHITE, 0.5));
-                    }
+                for (int x = 0; x < 16 * 18; x += 16) {
+                    DrawLine(x, 0, x, 16 * 13, ColorAlpha(WHITE,0.25));
+                }
+                for (int y = 0; y < 16 * 13; y += 16) {
+                    DrawLine(0, y, 16 * 18, y, ColorAlpha(WHITE,0.25));
                 }
                 theGameMap.drawCollisions();
             }

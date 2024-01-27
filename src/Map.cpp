@@ -47,16 +47,13 @@ int Map::countEnemies() {
 
 void Map::init() {
     collisionRectangles.push_back({-16,32,102,8}); //top left
-    collisionRectangles.push_back({170,32,102,8}); //top right
-    collisionRectangles.push_back({72,80,112,8}); //center floating
-    collisionRectangles.push_back({-16,88,48,8}); //left mini
-    collisionRectangles.push_back({224,88,48,8}); //right mini
-    collisionRectangles.push_back({-16,128,104,8}); //bottom left
-    collisionRectangles.push_back({168,128,104,8}); //bottom right
-    collisionRectangles.push_back({-16,176,288,16}); //ground
-    for (Rectangle& r : collisionRectangles) {
-        r.y += 8;
-    }
+    collisionRectangles.push_back({202,32,102,8}); //top right
+    collisionRectangles.push_back({88,88,112,8}); //center floating
+    collisionRectangles.push_back({-16,94,48,8}); //left mini
+    collisionRectangles.push_back({256,96,48,8}); //right mini
+    collisionRectangles.push_back({-16,144,104,8}); //bottom left
+    collisionRectangles.push_back({200,144,104,8}); //bottom right
+    collisionRectangles.push_back({-16,200,320,16}); //ground
 
 
 
