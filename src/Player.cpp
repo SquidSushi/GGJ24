@@ -82,7 +82,7 @@ bool Player::pressedJump() {
     return false;
 }
 
-void Player::update() {
+void Player::update(int frameCount_p) {
     handleGravity();
     wrapAroundScreen();
     transformPosition();
