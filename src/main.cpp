@@ -77,6 +77,9 @@ int main() {
             DrawText(TextFormat("x: %i", (int) cattington.position.x), 10, 30, 10, LIGHTGRAY);
             DrawText(TextFormat("y: %i", (int) cattington.position.y), 10, 40, 10, LIGHTGRAY);
         }
+        if(frameCount >= 60){
+            frameCount = 0;
+        }
         EndDrawing();
         frameCount++;
     } // Main game loop end
