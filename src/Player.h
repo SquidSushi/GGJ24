@@ -25,10 +25,10 @@ public:
     void animateWalking(int frameCount_p);
     void animateJumping(int frameCount_p);
     void animateSliding(int frameCount_p);
-    void animation(int frameCount_p) override;
-    Player(Vector2 _position, Rectangle _sourceRec);
-
     void animateFalling(int frameCount_p);
+    void animation(int frameCount_p) override;
+    void updateState() override;
+    Player(Vector2 _position, Rectangle _sourceRec);
 };
 
 

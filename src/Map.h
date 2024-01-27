@@ -15,15 +15,16 @@ public:
     void drawMap();
     void drawCollisions();
     void update();
+    void init();
 private:
     std::vector<Entity*> entities;
     int collisionData[16][12];
     std::vector<Rectangle> collisionRectangles;
-    Texture2D mapTextureForeground;
+    Texture2D mapTextureForeground = LoadTexture("assets/grahics/backgrounds/bg.png");
     Texture2D mapTextureBackground;
-    void generateCollisionRectangles(); //should be called just once
     std::vector<int> enemySpawnQueue;
     void generateEnemySpawnQueue();
+    Image collisionImage = LoadImage("assets/graphics/backgrunds/collision.png");
     int mapLevel = 0;
     enum {preparing, playing, finished}state;
     int calcSpawnCD();

@@ -26,6 +26,8 @@ public:
     bool checkForCollision(Vector2 nextPosition);
      virtual void animation(int frameCount_p) = 0;
     virtual void update() = 0;
+
+    virtual void updateState() = 0;
 };
 
 

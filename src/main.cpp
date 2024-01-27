@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "enumsAndConstants.h"
 #include "WalkingEnemy.h"
+#include "Map.h"
 
 int main() {
     // Raylib initialization
@@ -25,6 +26,8 @@ int main() {
     Player cattington({0, 0}, {0, 0, 32, 32});
     RenderTexture gameCanvas = LoadRenderTexture(16 * 16, 16 * 12);
     bool f3mode = false;
+    Map theGameMap;
+    theGameMap.init();
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -35,6 +38,7 @@ int main() {
 
         cattington.PlayerMovement();
 
+        theGameMap.update();
         cattington.update();
         karen.update();
 
@@ -45,8 +49,18 @@ int main() {
             ClearBackground(BLACK);
             DrawRectangleGradientV(0, 0, 16 * 16, 16 * 12, GetColor(0xa355dfff), GetColor(0x460074ff));
             //DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
+            theGameMap.drawMap();
             cattington.animation(frameCount);
             karen.animation(frameCount);
+            if (f3mode) {
+                //draw a grid
+                for (int x = 0; x < 16; x++) {
+                    for (int y = 0; y < 12; y++) {
+                        DrawRectangleLines(x * 16, y * 16, 16, 16, ColorAlpha(WHITE, 0.5));
+                    }
+                }
+                theGameMap.drawCollisions();
+            }
         }
         EndTextureMode();
         int scale = GetScreenHeight() / gameCanvas.texture.height;
