@@ -9,8 +9,8 @@
 Player::Player(Vector2 _position, Rectangle _sourceRec) {
     idleAnimation = LoadTexture("assets/graphics/cat/idle.png");
     walkingAnimation = LoadTexture("assets/graphics/cat/walk.png");
-    jumpingAnimation = LoadTexture("assets/graphics/cat/jumping.png");
-    fallingAnimation = LoadTexture("assets/graphics/cat/falling.png");
+    jumpingAnimation = LoadTexture("assets/graphics/cat/JumpFinal.png");
+    fallingAnimation = LoadTexture("assets/graphics/cat/FallingFinal.png");
     slidingAnimation = LoadTexture("assets/graphics/cat/idle.png");
     position = _position;
     sourceRec = _sourceRec;
@@ -146,7 +146,7 @@ void Player::animateSliding(int frameCount_p) {
 
 void Player::animateFalling(int frameCount_p){
     for (int i = 0; i < 3; i++){
-        DrawTexturePro(fallingAnimation, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 16}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
+        DrawTexturePro(fallingAnimation, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
