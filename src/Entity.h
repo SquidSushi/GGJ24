@@ -12,8 +12,8 @@ class Entity {
 public:
     Vector2 position;
     Vector2 velocity = {0,0};
-    float maxSpeed = 4;
-    float terminalVelocity = 10;
+    float maxSpeed = 3;
+    float terminalVelocity = 1;
     float massGravity = 0.1;
     Texture2D entityTexture;
     Rectangle sourceRec;
@@ -25,7 +25,6 @@ public:
     void handleGravity();
     void wrapAroundScreen();
     void transformPosition();
-    bool checkForCollision(Vector2 nextPosition);
      virtual void animation(int frameCount_p) = 0;
      virtual void drawDebug();
     virtual void update(int frameCount_p) = 0;

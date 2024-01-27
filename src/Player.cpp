@@ -194,7 +194,7 @@ void Player::handleCollision() {
                 velocity.y = 0;
                 if (collisions & 1){
                     state = Walking;
-
+                    updateState();
                 }
                 if (collisions & 2){
                      state = Falling;
