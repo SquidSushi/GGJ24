@@ -12,7 +12,7 @@ void Entity::handleGravity() {
         if((velocity.y + massGravity) < terminalVelocity)
         {
             this->velocity.y += this->massGravity;
-            if(this->velocity.y < 0){
+            if(this->velocity.y > 0){
                 this->state = Falling;
             }
         }
@@ -23,7 +23,10 @@ bool Entity::checkForCollision(Vector2 nextPosition) {
     if(nextPosition.y > 8 * 23 - sourceRec.height){
         this->position.y = 8 * 23 - sourceRec.height;
         this->velocity.y = 0;
-        state = Idle;
+        if(velocity.x < 1 && velocity.x > -1){
+            state = Idle;
+        }
+        else{state = Walking;}
         return false;
     }
     return true;

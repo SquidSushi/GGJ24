@@ -13,6 +13,7 @@ public:
     Texture2D idleAnimation;
     Texture2D walkingAnimation;
     Texture2D jumpingAnimation;
+    Texture2D fallingAnimation;
     Texture2D slidingAnimation;
 
     void PlayerMovement();
@@ -26,6 +27,8 @@ public:
     void animateSliding(int frameCount_p);
     void animation(int frameCount_p) override;
     Player(Vector2 _position, Rectangle _sourceRec);
+
+    void animateFalling(int frameCount_p);
 };
 
 
