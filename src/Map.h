@@ -16,8 +16,10 @@ public:
     void drawCollisions();
     void update();
     void init();
-private:
+
     std::vector<Entity*> entities;
+private:
+    int frameCount = 0;
     int collisionData[16][12];
     std::vector<Rectangle> collisionRectangles;
     Texture2D mapTextureForeground = LoadTexture("assets/graphics/backgrounds/bg.png");

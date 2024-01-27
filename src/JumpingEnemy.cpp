@@ -15,9 +15,6 @@ JumpingEnemy::JumpingEnemy() {
 void JumpingEnemy::update(int frameCount_p) {
     jumping(frameCount_p);
     handleGravity();
-    if(checkForCollision({position.x + velocity.x,position.y + velocity.y}) && state == Jumping && frameCount_p % 10 == 0){
-       state = Waiting;
-    }
     wrapAroundScreen();
     transformPosition();
 }

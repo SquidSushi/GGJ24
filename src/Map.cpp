@@ -61,6 +61,9 @@ void Map::init() {
 
 void Map::drawMap() {
     DrawTexture(mapTextureBackground, 0, 0, WHITE);
+    for (auto it = entities.begin(); it != entities.end(); ++it) {
+        (*it)->animation(frameCount);
+    }
     DrawTexture(mapTextureForeground, 0, 0, WHITE);
 }
 
@@ -68,9 +71,45 @@ void Map::drawCollisions() {
     for (Rectangle& r : collisionRectangles) {
         DrawRectangleLines(r.x, r.y, r.width, r.height, RED);
     }
+    for (auto it = entities.begin(); it != entities.end(); ++it) {
+        (*it)->drawDebug();
+    }
 
 }
 
 void Map::update() {
-    //TODO
+    frameCount++;
+    //collide all Entities with all collision rectangles and note
+    for (auto & entity : entities) {
+        entity->collisionRec.x = entity->position.x;
+        entity->collisionRec.y = entity->position.y;
+
+        Rectangle feet = {entity->position.x,
+                          entity->position.y + entity->collisionRec.height - 4,
+                          entity->collisionRec.width,
+                          4};
+        Rectangle head = {
+                entity->position.x,
+                entity->position.y + 4,
+                entity->collisionRec.width,
+                4
+        };
+        entity->collisions = 0;
+        for (auto collisionRectangle : collisionRectangles) {
+            if (CheckCollisionRecs(feet, collisionRectangle)) {
+                float depth = GetCollisionRec(feet, collisionRectangle).height;
+                entity->position.y -= depth;
+                entity->collisions += 1;
+            }
+            if (CheckCollisionRecs(head, collisionRectangle)) {
+                float depth = GetCollisionRec(head, collisionRectangle).height;
+                entity->position.y -= depth;
+                entity->collisions += 2;
+            }
+        }
+    }
+    for (int i = 0; i < entities.size(); ++i) {
+        entities[i]->update(frameCount);
+    }
+
 }

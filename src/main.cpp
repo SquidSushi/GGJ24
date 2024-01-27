@@ -30,6 +30,7 @@ int main() {
     bool f3mode = false;
     Map theGameMap;
     theGameMap.init();
+    theGameMap.entities.push_back(&cattington);
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -44,6 +45,7 @@ int main() {
         cattington.update(frameCount);
         karen.update(frameCount);
         dog.update(frameCount);
+
 
         BeginDrawing();
         ClearBackground(DARKGRAY);

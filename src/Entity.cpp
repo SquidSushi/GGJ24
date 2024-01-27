@@ -7,27 +7,15 @@
 #include "enumsAndConstants.h"
 
 void Entity::handleGravity() {
-    if(this->checkForCollision({this->position.x, (this->position.y + this->velocity.y + this->massGravity)}))
+    if((velocity.y + massGravity) < terminalVelocity)
     {
-        if((velocity.y + massGravity) < terminalVelocity)
-        {
-            this->velocity.y += this->massGravity;
-            if(this->velocity.y > 0){
-                this->state = Falling;
-            }
+        this->velocity.y += this->massGravity;
+        if(this->velocity.y > 0){
+            this->state = Falling;
         }
     }
 }
 
-bool Entity::checkForCollision(Vector2 nextPosition) {
-    if(nextPosition.y > 8 * 23 - sourceRec.height){
-        this->position.y = 8 * 23 - sourceRec.height;
-        this->velocity.y = 0;
-        updateState();
-        return false;
-    }
-    return true;
-}
 
 void Entity::transformPosition() {
     this->position.x += this->velocity.x;
@@ -39,4 +27,8 @@ void Entity::wrapAroundScreen() {
     if(position.x < 0){
         position.x += 16*16;
     } 
+}
+
+void Entity::drawDebug() {
+
 }

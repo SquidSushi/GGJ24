@@ -7,14 +7,18 @@
 
 //Default Constructor
 Player::Player(Vector2 _position, Rectangle _sourceRec) {
-    idleAnimation = LoadTexture("assets/graphics/cat/idle.png");
-    walkingAnimation = LoadTexture("assets/graphics/cat/walk.png");
-    jumpingAnimation = LoadTexture("assets/graphics/cat/JumpFinal.png");
-    fallingAnimation = LoadTexture("assets/graphics/cat/FallingFinal.png");
-    slidingAnimation = LoadTexture("assets/graphics/cat/Cat Slipping.png");
+    for(int i = 0; i < 3; i++){
+        idleAnimation[i] = LoadTexture(TextFormat("assets/graphics/cat/Idle_%i.png", i));
+        walkingAnimation[i] = LoadTexture(TextFormat("assets/graphics/cat/Walk_%i.png", i));
+        jumpingAnimation[i] = LoadTexture(TextFormat("assets/graphics/cat/Jump_%i.png", i));
+        fallingAnimation[i] = LoadTexture(TextFormat("assets/graphics/cat/Falling_%i.png", i));
+        pivotAnimation[i] = LoadTexture(TextFormat("assets/graphics/cat/Slipping_%i.png", i));
+    }
     position = _position;
     sourceRec = _sourceRec;
+    collisionRec = {position.x, position.y, 16, 32};
 }
+
 
 
 void Player::PlayerMovement()
@@ -83,9 +87,11 @@ bool Player::pressedJump() {
 }
 
 void Player::update(int frameCount_p) {
+    handleCollision();
     handleGravity();
     wrapAroundScreen();
     transformPosition();
+
 }
 
 void Player::animation(int frameCount_p) {
@@ -111,7 +117,7 @@ void Player::animation(int frameCount_p) {
 
 void Player::animateIdle(int frameCount_p) {
     for (int i = 0; i < 3; i++){
-        DrawTexturePro(idleAnimation, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
+        DrawTexturePro(idleAnimation[powerUpState], {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y-8, 16+16, 32+16}, {}, 0, WHITE);
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
@@ -120,7 +126,7 @@ void Player::animateIdle(int frameCount_p) {
 
 void Player::animateWalking(int frameCount_p) {
     for (int i = 0; i < 3; i++){
-        DrawTexturePro(walkingAnimation, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
+        DrawTexturePro(walkingAnimation[powerUpState], {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y-8, 16+16, 32+16}, {}, 0, WHITE);
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
@@ -129,7 +135,7 @@ void Player::animateWalking(int frameCount_p) {
 
 void Player::animateJumping(int frameCount_p) {
     for (int i = 0; i < 3; i++){
-        DrawTexturePro(jumpingAnimation, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
+        DrawTexturePro(jumpingAnimation[powerUpState], {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y-8, 16+16, 32+16}, {}, 0, WHITE);
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
@@ -138,7 +144,7 @@ void Player::animateJumping(int frameCount_p) {
 
 void Player::animateSliding(int frameCount_p) {
     for (int i = 0; i < 3; i++){
-        DrawTexturePro(slidingAnimation, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
+        DrawTexturePro(pivotAnimation[powerUpState], {currentFrame * 32.0f, 0, sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y-8, 16 + 16, 32 + 16}, {}, 0, WHITE);
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
@@ -147,7 +153,7 @@ void Player::animateSliding(int frameCount_p) {
 
 void Player::animateFalling(int frameCount_p){
     for (int i = 0; i < 3; i++){
-        DrawTexturePro(fallingAnimation, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
+        DrawTexturePro(fallingAnimation[powerUpState], {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y - 8, 16+16, 32+16}, {}, 0, WHITE);
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
@@ -180,4 +186,24 @@ void Player::updateState() {
             state = Idle;
         }
     }
+}
+
+void Player::handleCollision() {
+    if(state == Jumping || state == Falling){
+            if (collisions & 3){
+                velocity.y = 0;
+                if (collisions & 1){
+                    state = Walking;
+                    updateState();
+                }
+                if (collisions & 2){
+                     state = Falling;
+                }
+        }
+    }
+}
+
+void Player::drawDebug() {
+    Entity::drawDebug();
+    DrawRectangleLinesEx(collisionRec, 1, RED);
 }
