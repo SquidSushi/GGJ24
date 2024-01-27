@@ -5,6 +5,7 @@
 #include "config.h"
 #include "Player.h"
 #include "enumsAndConstants.h"
+#include "WalkingEnemy.h"
 
 int main() {
     // Raylib initialization
@@ -20,6 +21,7 @@ int main() {
 
     int frameCount = 0;
 
+    WalkingEnemy karen;
     Player cattington({0, 0}, {0, 0, 32, 32});
     RenderTexture gameCanvas = LoadRenderTexture(16 * 16, 16 * 12);
     bool f3mode = false;
@@ -34,6 +36,7 @@ int main() {
         cattington.PlayerMovement();
 
         cattington.update();
+        karen.update();
 
         BeginDrawing();
         ClearBackground(DARKGRAY);
@@ -43,6 +46,7 @@ int main() {
             DrawRectangleGradientV(0, 0, 16 * 16, 16 * 12,PURPLE,DARKBLUE);
             DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
             cattington.animation(frameCount);
+            karen.animation(frameCount);
         }
         EndTextureMode();
         int scale = GetScreenHeight() / gameCanvas.texture.height;

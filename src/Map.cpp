@@ -20,7 +20,7 @@ int Map::calcSpawnCD() {
 }
 
 int Map::calcMaxEnemies() {
-    //by default the max enemies on the map is 3 and it increases by 1 every 2 levels
+    //by default the max enemies on the map is 3, and it increases by 1 every 2 levels
     return 3 + mapLevel / 2;
 }
 

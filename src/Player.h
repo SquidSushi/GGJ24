@@ -9,6 +9,7 @@
 class Player : public Entity {
 public:
     float jumpForce = 20;
+    int lives = 0;
     Texture2D idleAnimation;
     Texture2D walkingAnimation;
     Texture2D jumpingAnimation;

@@ -57,6 +57,7 @@ void Player::PlayerMovement()
 bool Player::pressedLeft() {
     if(IsKeyDown(KEY_A) ||IsKeyDown(KEY_LEFT) || GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X) < -0.5)
     {
+        sourceRec.width = -32;
         return true;
     }
     return false;
@@ -65,6 +66,7 @@ bool Player::pressedLeft() {
 bool Player::pressedRight() {
     if(IsKeyDown(KEY_D) ||IsKeyDown(KEY_RIGHT) || GetGamepadAxisMovement(0, GAMEPAD_AXIS_RIGHT_X) > 0.5)
     {
+        sourceRec.width = 32;
         return true;
     }
     return false;
