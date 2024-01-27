@@ -3,16 +3,17 @@
 //
 
 #include "WalkingEnemy.h"
+#include "enumsAndConstants.h"
 
 WalkingEnemy::WalkingEnemy() {
     position = {0,0};
-    velocity = {1,0};
+    velocity = {0.25,0};
     sourceRec = {0, 0, 32, 32};
-    state = Left;
+    direction = Left;
 }
 
 void WalkingEnemy::walking() {
-    switch (state) {
+    switch (direction) {
         case Left:
             sourceRec = {sourceRec.x,sourceRec.y,-32,32};
             velocity.x = -2;
@@ -26,9 +27,10 @@ void WalkingEnemy::walking() {
     }
 }
 
-void WalkingEnemy::update() {
+void WalkingEnemy::update(int frameCount_p) {
     walking();
     handleGravity();
+    updateState();
     wrapAroundScreen();
     transformPosition();
 }

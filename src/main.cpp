@@ -7,6 +7,7 @@
 #include "enumsAndConstants.h"
 #include "WalkingEnemy.h"
 #include "Map.h"
+#include "JumpingEnemy.h"
 
 int main() {
     // Raylib initialization
@@ -23,6 +24,7 @@ int main() {
     int frameCount = 0;
 
     WalkingEnemy karen;
+    JumpingEnemy dog;
     Player cattington({0, 0}, {0, 0, 32, 32});
     RenderTexture gameCanvas = LoadRenderTexture(16 * 18, 16 * 13);
     bool f3mode = false;
@@ -39,8 +41,9 @@ int main() {
         cattington.PlayerMovement();
 
         theGameMap.update();
-        cattington.update();
-        karen.update();
+        cattington.update(frameCount);
+        karen.update(frameCount);
+        dog.update(frameCount);
 
         BeginDrawing();
         ClearBackground(DARKGRAY);
@@ -52,6 +55,7 @@ int main() {
             theGameMap.drawMap();
             cattington.animation(frameCount);
             karen.animation(frameCount);
+            dog.animation(frameCount);
             if (f3mode) {
                 //draw a grid
                 for (int x = 0; x < 16 * 18; x += 16) {

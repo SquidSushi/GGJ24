@@ -20,7 +20,7 @@ public:
     bool pressedLeft();
     bool pressedRight();
     bool pressedJump();
-    void update() override;
+    void update(int frameCount_p) override;
     void animateIdle(int frameCount_p);
     void animateWalking(int frameCount_p);
     void animateJumping(int frameCount_p);
