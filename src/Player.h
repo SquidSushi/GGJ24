@@ -9,12 +9,14 @@
 class Player : public Entity {
 public:
     float jumpForce = 20;
+    int powerUpState = 0;
+    enum powerUpStates{None, Banana, Panty};
     int lives = 0;
-    Texture2D idleAnimation;
-    Texture2D walkingAnimation;
-    Texture2D jumpingAnimation;
-    Texture2D fallingAnimation;
-    Texture2D slidingAnimation;
+    Texture2D idleAnimation[3];
+    Texture2D walkingAnimation[3];
+    Texture2D jumpingAnimation[3];
+    Texture2D fallingAnimation[3];
+    Texture2D pivotAnimation[3];
 
     void PlayerMovement();
     bool pressedLeft();
