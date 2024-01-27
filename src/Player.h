@@ -31,9 +31,10 @@ public:
     void animation(int frameCount_p) override;
     void updateState() override;
     Player(Vector2 _position, Rectangle _sourceRec);
-    void drawDebug() override;
 
     void handleCollision();
+
+    void drawDebug();
 };
 
 

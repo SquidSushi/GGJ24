@@ -88,7 +88,7 @@ bool Player::pressedJump() {
 }
 
 void Player::update(int frameCount_p) {
-    if(state == Jumping || state == Falling || state == Walking){
+    if(state != Idle){
         handleGravity();
     }
     handleCollision();

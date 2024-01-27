@@ -101,6 +101,11 @@ void Map::update() {
                 entity->position.y -= depth;
                 entity->collisions += 1;
                 entity->position.y += 1/128.0f;
+                for(int i = 0; i < entities.size(); i++){
+                    if (dynamic_cast<JumpingEnemy*>(this->entities[i]) != nullptr) {
+                        entities[i]->state = 0;
+                    }
+                }
             }
             if (CheckCollisionRecs(head, collisionRectangle)) {
                 float depth = GetCollisionRec(head, collisionRectangle).height;
