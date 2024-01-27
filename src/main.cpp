@@ -43,8 +43,8 @@ int main() {
         BeginTextureMode(gameCanvas);
         {
             ClearBackground(BLACK);
-            DrawRectangleGradientV(0, 0, 16 * 16, 16 * 12,PURPLE,DARKBLUE);
-            DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
+            DrawRectangleGradientV(0, 0, 16 * 16, 16 * 12, GetColor(0xa355dfff), GetColor(0x460074ff));
+            //DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
             cattington.animation(frameCount);
             karen.animation(frameCount);
         }
