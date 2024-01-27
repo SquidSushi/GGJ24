@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "enumsAndConstants.h"
 #include "WalkingEnemy.h"
+#include "Map.h"
 
 int main() {
     // Raylib initialization
@@ -23,8 +24,10 @@ int main() {
 
     WalkingEnemy karen;
     Player cattington({0, 0}, {0, 0, 32, 32});
-    RenderTexture gameCanvas = LoadRenderTexture(16 * 16, 16 * 12);
+    RenderTexture gameCanvas = LoadRenderTexture(16 * 18, 16 * 13);
     bool f3mode = false;
+    Map theGameMap;
+    theGameMap.init();
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -35,6 +38,7 @@ int main() {
 
         cattington.PlayerMovement();
 
+        theGameMap.update();
         cattington.update();
         karen.update();
 
@@ -43,10 +47,21 @@ int main() {
         BeginTextureMode(gameCanvas);
         {
             ClearBackground(BLACK);
-            DrawRectangleGradientV(0, 0, 16 * 16, 16 * 12, GetColor(0xa355dfff), GetColor(0x460074ff));
+            DrawRectangleGradientV(0, 0, 16 * 18, 16 * 13, GetColor(0xa355dfff), GetColor(0x460074ff));
             //DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
+            theGameMap.drawMap();
             cattington.animation(frameCount);
             karen.animation(frameCount);
+            if (f3mode) {
+                //draw a grid
+                for (int x = 0; x < 16 * 18; x += 16) {
+                    DrawLine(x, 0, x, 16 * 13, ColorAlpha(WHITE,0.25));
+                }
+                for (int y = 0; y < 16 * 13; y += 16) {
+                    DrawLine(0, y, 16 * 18, y, ColorAlpha(WHITE,0.25));
+                }
+                theGameMap.drawCollisions();
+            }
         }
         EndTextureMode();
         int scale = GetScreenHeight() / gameCanvas.texture.height;
@@ -61,6 +76,9 @@ int main() {
             //Draw cattingtons x and y position in integers
             DrawText(TextFormat("x: %i", (int) cattington.position.x), 10, 30, 10, LIGHTGRAY);
             DrawText(TextFormat("y: %i", (int) cattington.position.y), 10, 40, 10, LIGHTGRAY);
+        }
+        if(frameCount >= 60){
+            frameCount = 0;
         }
         EndDrawing();
         frameCount++;

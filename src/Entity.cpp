@@ -23,10 +23,7 @@ bool Entity::checkForCollision(Vector2 nextPosition) {
     if(nextPosition.y > 8 * 23 - sourceRec.height){
         this->position.y = 8 * 23 - sourceRec.height;
         this->velocity.y = 0;
-        if(velocity.x < 1 && velocity.x > -1){
-            state = Idle;
-        }
-        else{state = Walking;}
+        updateState();
         return false;
     }
     return true;

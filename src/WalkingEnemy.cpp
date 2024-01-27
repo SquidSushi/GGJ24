@@ -41,3 +41,7 @@ void WalkingEnemy::animation(int frameCount_p) {
         currentFrame++;
     }
 }
+
+void WalkingEnemy::updateState() {
+
+}

@@ -7,7 +7,14 @@
 #include "JumpingEnemy.h"
 
 void Map::generateEnemySpawnQueue() {
-
+    //generate a random number of enemies to spawn relative to the map level
+    //1 is a karen, 2 is a dog
+    int enemyCostPool = 1 + mapLevel * 2;
+    while (enemyCostPool > 0) {
+        int enemyCost = GetRandomValue(1, 2);
+        enemySpawnQueue.push_back(enemyCost);
+        enemyCostPool -= enemyCost;
+    }
 
 }
 
@@ -36,4 +43,34 @@ int Map::countEnemies() {
         }
     }
     return enemyCount;
+}
+
+void Map::init() {
+    collisionRectangles.push_back({-16,32,102,8}); //top left
+    collisionRectangles.push_back({202,32,102,8}); //top right
+    collisionRectangles.push_back({88,88,112,8}); //center floating
+    collisionRectangles.push_back({-16,94,48,8}); //left mini
+    collisionRectangles.push_back({256,96,48,8}); //right mini
+    collisionRectangles.push_back({-16,144,104,8}); //bottom left
+    collisionRectangles.push_back({200,144,104,8}); //bottom right
+    collisionRectangles.push_back({-16,192,320,16}); //ground
+
+
+
+}
+
+void Map::drawMap() {
+    DrawTexture(mapTextureBackground, 0, 0, WHITE);
+    DrawTexture(mapTextureForeground, 0, 0, WHITE);
+}
+
+void Map::drawCollisions() {
+    for (Rectangle& r : collisionRectangles) {
+        DrawRectangleLines(r.x, r.y, r.width, r.height, RED);
+    }
+
+}
+
+void Map::update() {
+    //TODO
 }
