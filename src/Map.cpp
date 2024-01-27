@@ -35,4 +35,5 @@ int Map::countEnemies() {
             enemyCount++;
         }
     }
+    return enemyCount;
 }
