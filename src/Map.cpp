@@ -100,10 +100,11 @@ void Map::update() {
                 float depth = GetCollisionRec(feet, collisionRectangle).height;
                 entity->position.y -= depth;
                 entity->collisions += 1;
+                entity->position.y += 1/128.0f;
             }
             if (CheckCollisionRecs(head, collisionRectangle)) {
                 float depth = GetCollisionRec(head, collisionRectangle).height;
-                entity->position.y -= depth;
+                entity->position.y += depth;
                 entity->collisions += 2;
             }
         }

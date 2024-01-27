@@ -23,7 +23,7 @@ private:
     int collisionData[16][12];
     std::vector<Rectangle> collisionRectangles;
     Texture2D mapTextureForeground = LoadTexture("assets/graphics/backgrounds/bg.png");
-    Texture2D mapTextureBackground;
+    Texture2D mapTextureBackground = LoadTexture("assets/graphics/backgrounds/hintergrundpilz.png");
     std::vector<int> enemySpawnQueue;
     void generateEnemySpawnQueue();
     Image collisionImage = LoadImage("assets/graphics/backgrunds/collision.png");

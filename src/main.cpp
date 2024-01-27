@@ -52,10 +52,10 @@ int main() {
         BeginTextureMode(gameCanvas);
         {
             ClearBackground(BLACK);
-            DrawRectangleGradientV(0, 0, 16 * 18, 16 * 13, GetColor(0xa355dfff), GetColor(0x460074ff));
+            //DrawRectangleGradientV(0, 0, 16 * 18, 16 * 13, GetColor(0xa355dfff), GetColor(0x460074ff));
             //DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
             theGameMap.drawMap();
-            cattington.animation(frameCount);
+            //cattington.animation(frameCount);
             karen.animation(frameCount);
             dog.animation(frameCount);
             if (f3mode) {
@@ -83,9 +83,7 @@ int main() {
             DrawText(TextFormat("x: %i", (int) cattington.position.x), 10, 30, 10, LIGHTGRAY);
             DrawText(TextFormat("y: %i", (int) cattington.position.y), 10, 40, 10, LIGHTGRAY);
         }
-        if(frameCount >= 60){
-            frameCount = 0;
-        }
+
         EndDrawing();
         frameCount++;
     } // Main game loop end
