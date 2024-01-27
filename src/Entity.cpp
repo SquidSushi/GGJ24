@@ -40,3 +40,7 @@ void Entity::wrapAroundScreen() {
         position.x += 16*16;
     } 
 }
+
+void Entity::drawDebug() {
+
+}

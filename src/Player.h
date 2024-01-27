@@ -8,7 +8,7 @@
 
 class Player : public Entity {
 public:
-    float jumpForce = 20;
+    float jumpForce = 3.35;
     int powerUpState = 0;
     enum powerUpStates{None, Banana, Panty};
     int lives = 0;
@@ -31,6 +31,9 @@ public:
     void animation(int frameCount_p) override;
     void updateState() override;
     Player(Vector2 _position, Rectangle _sourceRec);
+    void drawDebug() override;
+
+    void handleCollision();
 };
 
 
