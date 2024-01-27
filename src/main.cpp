@@ -4,6 +4,7 @@
 
 #include "config.h"
 #include "Player.h"
+#include "enumsAndConstants.h"
 
 int main() {
     // Raylib initialization
@@ -19,7 +20,7 @@ int main() {
 
     int frameCount = 0;
 
-    Player cattington(LoadTexture("assets/graphics/cat/idle.png"), {0, 0}, {8, 0, 16, 32});
+    Player cattington({0, 0}, {0, 0, 32, 32});
     RenderTexture gameCanvas = LoadRenderTexture(16 * 16, 16 * 12);
     bool f3mode = false;
 
@@ -32,10 +33,7 @@ int main() {
 
         cattington.PlayerMovement();
 
-        //Gravity Handling
-        cattington.handleGravity();
-        cattington.wrapAroundScreen();
-        cattington.transformPosition();
+        cattington.update();
 
         BeginDrawing();
         ClearBackground(DARKGRAY);
