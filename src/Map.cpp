@@ -53,7 +53,7 @@ void Map::init() {
     collisionRectangles.push_back({256,96,48,8}); //right mini
     collisionRectangles.push_back({-16,144,104,8}); //bottom left
     collisionRectangles.push_back({200,144,104,8}); //bottom right
-    collisionRectangles.push_back({-16,200,320,16}); //ground
+    collisionRectangles.push_back({-16,192,320,16}); //ground
 
 
 
