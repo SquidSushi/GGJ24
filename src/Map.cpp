@@ -54,9 +54,9 @@ void Map::init() {
     collisionRectangles.push_back({-16, 144, 104, 8}); //bottom left
     collisionRectangles.push_back({200, 144, 104, 8}); //bottom right
     collisionRectangles.push_back({-16, 192, 320, 16}); //ground
-
-
-
+    this->mapLevel = 10;
+    generateEnemySpawnQueue();
+    timeUntilNextSpawn = calcSpawnCD();
 }
 
 void Map::drawMap() {
@@ -122,5 +122,37 @@ void Map::update() {
     for (unsigned int i = 0; i < entities.size(); ++i) {
         entities[i]->update(frameCount);
     }
+    timeUntilNextSpawn--;
+    //spawn enemies
+    if (timeUntilNextSpawn <= 0) {
+        if (enemySpawnQueue.size() > 0 && countEnemies() < calcMaxEnemies()) {
+            int enemyCost = enemySpawnQueue[0];
+            enemySpawnQueue.erase(enemySpawnQueue.begin());
+            if (enemyCost == 1) {
+                entities.push_back(new WalkingEnemy());
+                entities[entities.size() - 1]->position = {
+                        static_cast<float>(GetRandomValue(0, 288),
+                                -32)
+                };
 
+            }
+            if (enemyCost == 2) {
+                entities.push_back(new JumpingEnemy());
+                entities[entities.size() - 1]->position = {
+                        static_cast<float>(GetRandomValue(0, 288),
+                                -32)
+                };
+            }
+        }
+        timeUntilNextSpawn = calcSpawnCD();
+    }
+
+
+    //delete entities that are out marked to be deleted
+    for (unsigned int i = 0; i < entities.size(); ++i) {
+        if (entities[i]->toBeDeleted) {
+            delete entities[i];
+            entities.erase(entities.begin() + i);
+        }
+    }
 }
