@@ -3,3 +3,15 @@
 //
 
 #include "PantyBullet.h"
+
+void PantyBullet::updateState() {
+
+}
+
+void PantyBullet::update(int frameCount_p) {
+
+}
+
+void PantyBullet::animation(int frameCount_p) {
+
+}

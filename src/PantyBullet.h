@@ -9,7 +9,9 @@
 #include "Entity.h"
 
 class PantyBullet : public Entity {
-
+void updateState() override;
+void update(int frameCount_p) override;
+void animation(int frameCount_p) override;
 };
 
 
