@@ -23,7 +23,9 @@ add_executable(${PROJECT_NAME} main.cpp
         Pickup.cpp
         Pickup.h
         BananaTrap.h
-        BananaTrap.cpp)
+        BananaTrap.cpp
+        PantyBullet.h
+        PantyBullet.cpp)
 
 # Add config.h.in file
 configure_file(config.h.in config.h)
