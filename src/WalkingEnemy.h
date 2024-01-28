@@ -11,8 +11,8 @@
 class WalkingEnemy : public Entity {
     enum {Walking, Slipping, Yeeting} state;
     Texture2D walkingTexture = LoadTexture("assets/graphics/dog/DogWalk.png");
-    Texture2D slippingTexture = LoadTexture("assets/graphics/dog/Dog Die.png");
-    Texture2D yeetingTexture = LoadTexture("assets/graphics/cat/Dog Die.png");
+    Texture2D slippingTexture = LoadTexture("assets/graphics/dog/Banana.png");
+    Texture2D yeetingTexture = LoadTexture("assets/graphics/dog/Spinning.png");
     int frameCount = 0;
     int direction = 0;
 public:
