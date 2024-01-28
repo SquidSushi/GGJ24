@@ -29,6 +29,7 @@ public:
      virtual void animation(int frameCount_p) = 0;
      virtual void drawDebug();
     virtual void update(int frameCount_p) = 0;
+    virtual void handleCollision(){}
 
     virtual void updateState() = 0;
 

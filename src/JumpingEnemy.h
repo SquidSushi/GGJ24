@@ -27,6 +27,7 @@ class JumpingEnemy : public Entity {
 public:
     JumpingEnemy();
     void update(int frameCount_p) override;
+    void handleCollision() override;
     void drawDebug() override;
     void animation(int frameCount_p) override;
 };
