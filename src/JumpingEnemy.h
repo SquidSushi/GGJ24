@@ -13,8 +13,8 @@ class JumpingEnemy : public Entity {
     float jumpForce = 2;
     Texture2D standingTexture = LoadTexture("assets/graphics/dog/DogIdle.png");
     Texture2D jumpingTexture = LoadTexture("assets/graphics/dog/DogWalk.png");
-    Texture2D slippingTexture = LoadTexture("assets/graphics/dog/Dog Die.png");
-    Texture2D yeetingTexture = LoadTexture("assets/graphics/dog/Dog Die.png");
+    Texture2D slippingTexture = LoadTexture("assets/graphics/dog/Banana.png");
+    Texture2D yeetingTexture = LoadTexture("assets/graphics/dog/Spinning.png");
     int frameCount = 0;
     int direction = 0;
     void jumping(int frameCount_p);

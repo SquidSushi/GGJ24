@@ -21,7 +21,9 @@ add_executable(${PROJECT_NAME} main.cpp
         Map.cpp
         enumsAndConstants.h
         Pickup.cpp
-        Pickup.h)
+        Pickup.h
+        BananaTrap.h
+        BananaTrap.cpp)
 
 # Add config.h.in file
 configure_file(config.h.in config.h)
