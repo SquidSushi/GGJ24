@@ -22,17 +22,12 @@ int main() {
 #endif
 
     int frameCount = 0;
-
-    WalkingEnemy karen;
-    JumpingEnemy dog;
-    Player cattington({0, 0}, {0, 0, 32, 32});
+    Player cattington({GetScreenWidth()/4.0f * 3, GetScreenHeight()/4.0f + 25}, {0, 0, 32, 32});
     RenderTexture gameCanvas = LoadRenderTexture(16 * 18, 16 * 13);
     bool f3mode = false;
     Map theGameMap;
     theGameMap.init();
     theGameMap.entities.push_back(&cattington);
-    theGameMap.entities.push_back(&karen);
-    theGameMap.entities.push_back(&dog);
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
