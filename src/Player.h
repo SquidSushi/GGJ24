@@ -17,6 +17,7 @@ public:
     Texture2D jumpingAnimation[3];
     Texture2D fallingAnimation[3];
     Texture2D pivotAnimation[3];
+    Texture2D deathAnimation[3];
 
     void PlayerMovement();
     bool pressedLeft();
@@ -28,6 +29,7 @@ public:
     void animateJumping(int frameCount_p);
     void animateSliding(int frameCount_p);
     void animateFalling(int frameCount_p);
+    void animateDeath(int frameCount_p);
     void animation(int frameCount_p) override;
     void updateState() override;
     Player(Vector2 _position, Rectangle _sourceRec);

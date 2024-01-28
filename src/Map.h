@@ -24,6 +24,7 @@ private:
     std::vector<Rectangle> collisionRectangles;
     Texture2D mapTextureForeground = LoadTexture("assets/graphics/backgrounds/bg.png");
     Texture2D mapTextureBackground = LoadTexture("assets/graphics/backgrounds/hintergrundpilz.png");
+    Texture2D twerkingCat = LoadTexture("assets/graphics/backgrounds/twerking_cat.png");
     std::vector<int> enemySpawnQueue;
     void generateEnemySpawnQueue();
     Image collisionImage = LoadImage("assets/graphics/backgrunds/collision.png");

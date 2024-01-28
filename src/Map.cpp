@@ -61,6 +61,10 @@ void Map::init() {
 
 void Map::drawMap() {
     DrawTexture(mapTextureBackground, 0, 0, WHITE);
+    if (IsKeyDown(KEY_T)){
+        //render the twerking cat
+        DrawTextureRec(twerkingCat, {static_cast<float>(0 + frameCount / 1 % 7 * 288), 0, 288, 208}, {0, 0}, ColorFromHSV(GetTime()*180, 1, 1));
+    }
     for (auto it = entities.begin(); it != entities.end(); ++it) {
         (*it)->animation(frameCount);
     }
@@ -127,7 +131,7 @@ void Map::update() {
                 entities.push_back(new WalkingEnemy());
                 entities[entities.size() - 1]->position = {
                         static_cast<float>(GetRandomValue(0, 288),
-                                -32)
+                                -200)
                 };
 
             }
@@ -135,7 +139,7 @@ void Map::update() {
                 entities.push_back(new JumpingEnemy());
                 entities[entities.size() - 1]->position = {
                         static_cast<float>(GetRandomValue(0, 288),
-                                -32)
+                                -200)
                 };
             }
         }
