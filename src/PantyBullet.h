@@ -6,7 +6,9 @@
 #define RAYLIBSTARTER_PANTYBULLET_H
 
 
-class PantyBullet {
+#include "Entity.h"
+
+class PantyBullet : public Entity {
 
 };
 
