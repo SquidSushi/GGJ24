@@ -5,6 +5,8 @@
 #include "Map.h"
 #include "WalkingEnemy.h"
 #include "JumpingEnemy.h"
+#include "Player.h"
+#include "PantyBullet.h"
 
 void Map::generateEnemySpawnQueue() {
     //generate a random number of enemies to spawn relative to the map level
@@ -153,5 +155,22 @@ void Map::update() {
             delete entities[i];
             entities.erase(entities.begin() + i);
         }
+    }
+
+    // If the key "E" is pressed, a panthy will spawn in the middle of the player, facing in the direction of the player
+    if (IsKeyPressed(KEY_E)) {
+        Entity* cattington = nullptr;
+
+        for (int i = 0; i < entities.size(); ++i) {
+            if (dynamic_cast<Player*>(entities[i]) != nullptr)
+                cattington = entities[i];
+            }
+
+        Vector2 playerMiddle = {cattington->position.x + cattington->collisionRec.width / 2,
+                                cattington->position.y + cattington->collisionRec.height / 2};
+        Entity* newPanties = new PantyBullet();
+        newPanties->position = playerMiddle;
+        newPanties->velocity = {3 * cattington->velocity.x, -2};
+        entities.push_back(newPanties);
     }
 }

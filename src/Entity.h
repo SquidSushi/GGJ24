@@ -26,8 +26,8 @@ public:
     void handleGravity();
     void wrapAroundScreen();
     void transformPosition();
-     virtual void animation(int frameCount_p) = 0;
-     virtual void drawDebug();
+    virtual void animation(int frameCount_p) = 0;
+    virtual void drawDebug();
     virtual void update(int frameCount_p) = 0;
     virtual void handleCollision(){}
 
