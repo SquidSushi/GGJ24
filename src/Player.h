@@ -8,7 +8,7 @@
 
 class Player : public Entity {
 public:
-    float jumpForce = 3.35;
+    float jumpForce = 3.35f;
     int powerUpState = 0;
     enum powerUpStates{None, Banana, Panty};
     int lives = 0;

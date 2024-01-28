@@ -23,7 +23,7 @@ void Entity::transformPosition() {
 }
 
 void Entity::wrapAroundScreen() {
-    position.x = fmod(position.x, 16*18);
+    position.x = float(fmod(position.x, 16*18));
     if(position.x < 0){
         position.x += 16*18;
     } 
