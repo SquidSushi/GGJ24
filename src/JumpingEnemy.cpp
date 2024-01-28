@@ -9,10 +9,13 @@ JumpingEnemy::JumpingEnemy() {
     position = {0,0};
     velocity = {0,0};
     sourceRec = {0, 0, 32, 32};
+    collisionRec = {position.x, position.y, 16, 32};
+    direction = Right;
     state = Waiting;
 }
 
 void JumpingEnemy::update(int frameCount_p) {
+    handleCollision();
     jumping(frameCount_p);
     handleGravity();
     wrapAroundScreen();
@@ -46,6 +49,7 @@ void JumpingEnemy::updateState() {
     else{
         sourceRec.width = 32;
     }
+    state = Waiting;
 }
 
 void JumpingEnemy::jumping(int frameCount_p) {
@@ -65,6 +69,7 @@ void JumpingEnemy::jumping(int frameCount_p) {
             velocity.x = 0;
             if(frameCount_p % 60 == 0 && frameCount_p != 0){
                 state = JumpingStart;
+                position.y -= 2;
             }
             break;
         default:
@@ -74,7 +79,7 @@ void JumpingEnemy::jumping(int frameCount_p) {
 
 void JumpingEnemy::animateWaiting(int frameCount_p) {
     for (int i = 0; i < 3; i++){
-        DrawTexturePro(standingTexture, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
+        DrawTexturePro(standingTexture, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height}, {position.x + i * 288 - 288 - 8, position.y - 9, 16+16, 32+8}, {}, 0, WHITE);
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
@@ -83,7 +88,7 @@ void JumpingEnemy::animateWaiting(int frameCount_p) {
 
 void JumpingEnemy::animateJumping(int frameCount_p) {
     for (int i = 0; i < 3; i++){
-        DrawTexturePro(jumpingTexture, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
+        DrawTexturePro(jumpingTexture, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height}, {position.x + i * 288 - 288 - 8, position.y - 9, 32, 32+8}, {}, 0, WHITE);
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
@@ -92,7 +97,7 @@ void JumpingEnemy::animateJumping(int frameCount_p) {
 
 void JumpingEnemy::animateSlipping(int frameCount_p) {
     for (int i = 0; i < 3; i++){
-        DrawTexturePro(slippingTexture, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
+        DrawTexturePro(slippingTexture, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height}, {position.x + i * 288 - 288 - 8, position.y - 9, 32, 32+8}, {}, 0, WHITE);
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
@@ -101,9 +106,23 @@ void JumpingEnemy::animateSlipping(int frameCount_p) {
 
 void JumpingEnemy::animateYeeting(int frameCount_p) {
     for (int i = 0; i < 3; i++){
-        DrawTexturePro(yeetingTexture, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height + 8}, {position.x + i * 256 - 256 - 8, position.y, 16+16, 32+16}, {}, 0, WHITE);
+        DrawTexturePro(yeetingTexture, {currentFrame * 32.0f,0,sourceRec.width, sourceRec.height}, {position.x + i * 288 - 288 - 8, position.y - 9, 16+16, 32+8}, {}, 0, WHITE);
     }
     if(frameCount_p % 10 == 0){
         currentFrame++;
+    }
+}
+
+void JumpingEnemy::drawDebug() {
+    Entity::drawDebug();
+    DrawRectangleLinesEx(collisionRec, 1, RED);
+}
+
+void JumpingEnemy::handleCollision() {
+    if (collisions & 3){
+        velocity.y = 0;
+        if (collisions & 1){
+            updateState();
+        }
     }
 }

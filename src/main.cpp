@@ -31,6 +31,8 @@ int main() {
     Map theGameMap;
     theGameMap.init();
     theGameMap.entities.push_back(&cattington);
+    theGameMap.entities.push_back(&karen);
+    theGameMap.entities.push_back(&dog);
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -42,9 +44,6 @@ int main() {
         cattington.PlayerMovement();
 
         theGameMap.update();
-        cattington.update(frameCount);
-        karen.update(frameCount);
-        dog.update(frameCount);
 
 
         BeginDrawing();
@@ -52,12 +51,7 @@ int main() {
         BeginTextureMode(gameCanvas);
         {
             ClearBackground(BLACK);
-            //DrawRectangleGradientV(0, 0, 16 * 18, 16 * 13, GetColor(0xa355dfff), GetColor(0x460074ff));
-            //DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
             theGameMap.drawMap();
-            //cattington.animation(frameCount);
-            karen.animation(frameCount);
-            dog.animation(frameCount);
             if (f3mode) {
                 //draw a grid
                 for (int x = 0; x < 16 * 18; x += 16) {

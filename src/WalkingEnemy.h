@@ -20,6 +20,8 @@ public:
     void update(int frameCount_p) override;
     void animation(int frameCount_p) override;
     void updateState() override;
+    void drawDebug() override;
+    void handleCollision() override;
     WalkingEnemy();
 };
 

@@ -19,7 +19,9 @@ add_executable(${PROJECT_NAME} main.cpp
         WalkingEnemy.cpp
         Map.h
         Map.cpp
-        enumsAndConstants.h)
+        enumsAndConstants.h
+        Pickup.cpp
+        Pickup.h)
 
 # Add config.h.in file
 configure_file(config.h.in config.h)

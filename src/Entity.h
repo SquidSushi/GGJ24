@@ -10,11 +10,12 @@
 
 class Entity {
 public:
+    bool toBeDeleted = false;
     Vector2 position;
     Vector2 velocity = {0,0};
     float maxSpeed = 2;
     float terminalVelocity = 3;
-    float massGravity = 0.1;
+    float massGravity = 0.1f;
     Texture2D entityTexture;
     Rectangle sourceRec;
     Rectangle collisionRec = {0,0,16,24};
@@ -28,6 +29,7 @@ public:
      virtual void animation(int frameCount_p) = 0;
      virtual void drawDebug();
     virtual void update(int frameCount_p) = 0;
+    virtual void handleCollision(){}
 
     virtual void updateState() = 0;
 

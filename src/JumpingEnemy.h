@@ -10,7 +10,7 @@
 
 class JumpingEnemy : public Entity {
     enum {Waiting, JumpingStart, Jumping, Slipping, Yeeting} state;
-    float jumpForce = 10;
+    float jumpForce = 2;
     Texture2D standingTexture = LoadTexture("assets/graphics/dog/DogIdle.png");
     Texture2D jumpingTexture = LoadTexture("assets/graphics/dog/DogWalk.png");
     Texture2D slippingTexture = LoadTexture("assets/graphics/dog/Dog Die.png");
@@ -27,6 +27,8 @@ class JumpingEnemy : public Entity {
 public:
     JumpingEnemy();
     void update(int frameCount_p) override;
+    void handleCollision() override;
+    void drawDebug() override;
     void animation(int frameCount_p) override;
 };
 
